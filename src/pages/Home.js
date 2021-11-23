@@ -28,7 +28,6 @@ function Home(props) {
     return (
         <div>
             Home Page
-
             Welcome :  {userName}
         </div>
     );

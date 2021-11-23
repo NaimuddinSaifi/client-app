@@ -1,30 +1,25 @@
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 
 function Login() {
     const navigate = useNavigate()
 
     const handleClick = () => {
-        // if (localStorage.getItem('token')) {
-            const client_id = 'clientid123'
-            const redirect_uri = 'http://localhost:3000'
-            const auth_server_frontend="https://secure-river-45347.herokuapp.com"
-            const state = 'state'
-            const url = `${auth_server_frontend}/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}`
-            window && window.location &&
-                window.location.replace(url)
-        // } else {
-            // navigate('/login')
-        // }
-
+        const client_id = process.env.REACT_APP_CLIENT_ID || 'clientid123'
+        const redirect_uri = process.env.REACT_APP_REDIRECT_API || 'http://localhost:3000'
+        const state = 'state123'
+        const auth_frontend_url = process.env.REACT_APP_AUTH_FRONTEND_URL || "https://secure-river-45347.herokuapp.com"
+        const url = `${auth_frontend_url}/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}`
+        window &&
+            window.location &&
+            window.location.replace(url)
     }
+
     return (
         <div className="App">
             <header className="App-header">
-
-                <button onClick={handleClick}>
+                <button className="Auth-btn" onClick={handleClick}>
                     Login With Auth Server
                 </button>
-
             </header>
         </div>
     );
